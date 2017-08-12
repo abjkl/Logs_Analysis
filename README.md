@@ -20,14 +20,14 @@ You can download the data [here](https://d17h27t6h515a5.cloudfront.net/topher/20
 
 To build the reporting tool, you'll need to load the site's data into your local PostgreSQL database.
 
-To load the data, use the command '''psql -d news -f newsdata.sql'''.
+To load the data, use the command ```psql -d news -f newsdata.sql```.
 
 Makesure your data is in the same file with report.py
 
 ## How to use
 ### Run The Program
 1. **Makesure your data is in the same file with report.py**
-2. Then use the comand '''python3 report.py'''
+2. Then use the comand ```python3 report.py```
 3. The out come of the program will give you the answer for **popular articles,authors and error inforamation**
 
 ## Document
@@ -39,4 +39,4 @@ This file can generate the outcome for the following issues:
 3. On which days did more than 1% of requests lead to errors?
 
 ### Out come sample
-You can also get the anwser by reviewing the '''out_come_sample.txt'''.
+You can also get the anwser by reviewing the ```out_come_sample.txt```.
