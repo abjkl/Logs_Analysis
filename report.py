@@ -3,15 +3,23 @@
 
 import psycopg2
 
+
+# Connect the news database
+
+def connect(database_name="news"):
+    try:
+        db = psycopg2.connect("dbname={}".format(database_name))
+        cursor = db.cursor()
+        return db, cursor
+    except:
+        print("<error message>")
+
+
 # Get popular articles,authors and error proportion from the 'database'
-
-DBNAME = "news"
-
 
 def get_popular_articles():
     """Return most popular articles from the 'database', most popular first."""
-    db = psycopg2.connect(database=DBNAME)
-    c = db.cursor()
+    db,c =connect()
     c.execute("select articles.title as title, views.count as pv "
               "from articles "
               "join (select count(*) as count,substring(path from 10) as slug "
@@ -25,8 +33,7 @@ def get_popular_articles():
 
 def get_popular_authors():
     """Return authors and page views from the 'database'"""
-    db = psycopg2.connect(database=DBNAME)
-    c = db.cursor()
+    db, c = connect()
     c.execute("select authors.name, count(*) as pv "
               "from (select substring(path from 10) as slug from log "
               "where status='200 OK' and path<>'/') as views "
@@ -41,8 +48,7 @@ def get_popular_authors():
 
 def get_error():
     """Return the error percent more than 1% by day."""
-    db = psycopg2.connect(database=DBNAME)
-    c = db.cursor()
+    db, c = connect()
     c.execute("select * "
               "from "
               "(select total.date as date, "
